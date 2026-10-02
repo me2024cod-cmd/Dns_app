@@ -35,8 +35,13 @@ jobs:
         sed -i 's/# package.domain =/package.domain = org.dns/' buildozer.spec
         sed -i 's/# requirements = python3,kivy/requirements = python3,tkinter/' buildozer.spec
         sed -i 's/# orientation = portrait/orientation = portrait/' buildozer.spec
-        # این خط باعث میشه اندروید SDK بدون دردسر و خودکار لایسنس‌ها رو قبول کنه
+        
+        # تنظیم دقیق لایسنس و قفل کردن روی نسخه پایدار API 33 برای جلوگیری از ارور نسخه ۳۷
+        sed -i 's/# android.accept_sdk_license = False/android.accept_sdk_license = True/g' buildozer.spec
         echo "android.accept_sdk_license = True" >> buildozer.spec
+        sed -i 's/# android.api =.*/android.api = 33/g' buildozer.spec
+        sed -i 's/# android.min_api =.*/android.min_api = 21/g' buildozer.spec
+        sed -i 's/# android.sdk =.*/android.sdk = 33/g' buildozer.spec
 
     - name: Build APK with Buildozer
       run: |
