@@ -35,6 +35,8 @@ jobs:
         sed -i 's/# package.domain =/package.domain = org.dns/' buildozer.spec
         sed -i 's/# requirements = python3,kivy/requirements = python3,tkinter/' buildozer.spec
         sed -i 's/# orientation = portrait/orientation = portrait/' buildozer.spec
+        # این خط باعث میشه اندروید SDK بدون دردسر و خودکار لایسنس‌ها رو قبول کنه
+        echo "android.accept_sdk_license = True" >> buildozer.spec
 
     - name: Build APK with Buildozer
       run: |
